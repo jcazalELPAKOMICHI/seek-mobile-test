@@ -1,0 +1,5 @@
+name: flutter_qr_app
+packages:
+  - apps/*
+  - packages/auth_biometrics
+  - packages/qr_scanner

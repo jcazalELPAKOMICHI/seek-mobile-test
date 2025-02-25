@@ -1,0 +1,9 @@
+name: flutter_qr_app
+environment:
+  sdk: ">=3.7.0 <4.0.0"
+dev_dependencies:
+  melos: ^6.3.2
+  qr_scanner:
+    path: packages/qr_scanner
+  auth_biometrics:
+    path: packages/auth_biometrics
