@@ -1,0 +1,59 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flutter",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart"
+        },
+        {
+            "name": "seek",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "auth_biometrics",
+            "cwd": "packages/auth_biometrics",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "auth_biometrics (profile mode)",
+            "cwd": "packages/auth_biometrics",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "auth_biometrics (release mode)",
+            "cwd": "packages/auth_biometrics",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "qr_scanner",
+            "cwd": "packages/qr_scanner",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "qr_scanner (profile mode)",
+            "cwd": "packages/qr_scanner",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "qr_scanner (release mode)",
+            "cwd": "packages/qr_scanner",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
