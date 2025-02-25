@@ -1,4 +1,8 @@
 part of 'biometric_bloc.dart';
 
-@immutable
-sealed class BiometricEvent {}
+@freezed
+class BiometricEvent with _$BiometricEvent {
+  const factory BiometricEvent.isDeviceSupported() = _IsDeviceSupported;
+  const factory BiometricEvent.checkAvailableBiometricNames() =
+      _CheckAvailableBiometricNames;
+}
