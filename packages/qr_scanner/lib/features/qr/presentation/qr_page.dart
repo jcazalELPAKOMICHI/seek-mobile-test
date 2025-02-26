@@ -21,9 +21,29 @@ class _Qr extends StatefulWidget {
   State<_Qr> createState() => __QrState();
 }
 
-class __QrState extends State<_Qr> {
+class __QrState extends State<_Qr> with WidgetsBindingObserver {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
+  bool _enableflash = false;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+    controller?.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      controller?.resumeCamera();
+    }
+  }
 
   @override
   void reassemble() {
@@ -42,9 +62,31 @@ class __QrState extends State<_Qr> {
         children: [
           Expanded(
             flex: 5,
-            child: QRView(key: qrKey, onQRViewCreated: _onQRViewCreated),
+            child: QRView(
+              key: qrKey,
+              onQRViewCreated: _onQRViewCreated,
+              formatsAllowed: [BarcodeFormat.qrcode],
+              overlay: QrScannerOverlayShape(
+                overlayColor: Colors.grey.withOpacity(0.8),
+              ),
+            ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _enableflash = !_enableflash;
+          controller?.toggleFlash();
+          setState(() {});
+        },
+        tooltip: 'Escanear QR',
+        shape: const CircleBorder(),
+        backgroundColor: Colors.blue,
+        child: Icon(
+          !_enableflash ? Icons.flash_on : Icons.flash_off,
+          color: Colors.white,
+          size: 32,
+        ),
       ),
     );
   }

@@ -16,6 +16,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
@@ -44,9 +45,14 @@ android {
     buildFeatures{
         viewBinding = true
     }
+
     dependencies{
-        implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+        coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
+        implementation ("androidx.window:window:1.3.0")
+        implementation ("androidx.window:window-java:1.3.0")
+
     }
+  
 }
 
 flutter {
