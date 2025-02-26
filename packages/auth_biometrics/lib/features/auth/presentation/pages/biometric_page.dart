@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:auth_biometrics/core/injectable/injectable_config.dart';
 import 'package:auth_biometrics/features/auth/presentation/bloc/biometric_bloc.dart';
+import 'package:auth_biometrics/features/auth/presentation/widgets/biometric_button.dart';
+import 'package:auth_biometrics/features/auth/presentation/widgets/pin_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BiometricPage extends StatelessWidget {
-  const BiometricPage({super.key});
+  const BiometricPage({super.key, required this.onSuccess});
+
+  final ValueChanged<String> onSuccess;
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +20,14 @@ class BiometricPage extends StatelessWidget {
           (context) =>
               getIt.get<BiometricBloc>()
                 ..add(BiometricEvent.isDeviceSupported()),
-      child: _Biometric(),
+      child: _Biometric(onSuccess: onSuccess),
     );
   }
 }
 
 class _Biometric extends StatefulWidget {
-  const _Biometric();
+  const _Biometric({required this.onSuccess});
+  final ValueChanged<String> onSuccess;
 
   @override
   State<_Biometric> createState() => __BiometricState();
@@ -33,15 +40,47 @@ class __BiometricState extends State<_Biometric> {
       body: BlocBuilder<BiometricBloc, BiometricState>(
         builder: (context, state) {
           //Corroboramos si se usa la biometria en el dispositivo
-          return Column(
-            children: [
-              if (state.useBiometrics!)
-                ...[
-
-            ]else ...[
-                //sino se usa, le llavamos al widget que muestra para ingresar PIN
-              ],
-            ],
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 48,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    if (state.biometricName != null &&
+                        state.useBiometrics!) ...[
+                      BiometricButton(onSuccess: widget.onSuccess),
+                    ] else ...[
+                      //sino se usa, le llavamos al widget que muestra para ingresar PIN
+                      PinTextField(),
+                    ],
+                    Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Ingresar con PIN'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            exit(0);
+                          },
+                          child: Text('Cerrar aplicación'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
           );
         },
       ),

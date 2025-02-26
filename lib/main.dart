@@ -1,50 +1,25 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:auth_biometrics/core/injectable/injectable_config.dart'
-    as biometricConfig;
+import 'package:flutter_qr_app/core/routes/app_router.dart';
+import 'package:flutter_qr_app/features/auth/auth_page.dart';
 
-import 'package:auth_biometrics/features/auth/presentation/pages/biometric_page.dart';
+import 'package:flutter_qr_app/firebase_options.dart';
 
-void main() {
-  //Inicializamos las dependencias internas de la libreria de biometria
-  biometricConfig.configureBiometricDependencies();
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: AppRoutes.generateRoute,
+      initialRoute: AuthPage.routeName,
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return BiometricPage();
   }
 }
