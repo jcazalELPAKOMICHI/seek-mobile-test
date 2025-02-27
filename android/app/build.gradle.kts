@@ -6,6 +6,8 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+    kotlin("kapt")
+
 }
 
 android {
@@ -14,13 +16,13 @@ android {
    // ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
         isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     defaultConfig {
@@ -50,6 +52,9 @@ android {
         coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
         implementation ("androidx.window:window:1.3.0")
         implementation ("androidx.window:window-java:1.3.0")
+        implementation("androidx.room:room-runtime:2.6.1") 
+        kapt("androidx.room:room-compiler:2.6.1")
+        implementation("androidx.room:room-ktx:2.6.1")     // Soporte para coroutines
 
     }
   

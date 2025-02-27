@@ -94,6 +94,7 @@ class __QrState extends State<_Qr> with WidgetsBindingObserver {
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
+      controller.pauseCamera();
       widget.qrData(scanData.code ?? '');
     });
   }
