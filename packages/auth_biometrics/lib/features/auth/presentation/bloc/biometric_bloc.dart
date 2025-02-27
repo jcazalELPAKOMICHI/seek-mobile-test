@@ -12,6 +12,7 @@ part 'biometric_bloc.freezed.dart';
 class BiometricBloc extends Bloc<BiometricEvent, BiometricState> {
   final BiometricHelper biometricHelper;
   final String _password = '12345';
+  final String _welcomeMessage = '¡Bienvenido José!';
   BiometricBloc({required this.biometricHelper})
     : super(BiometricState.initial()) {
     on<BiometricEvent>((event, emit) async {
@@ -36,7 +37,7 @@ class BiometricBloc extends Bloc<BiometricEvent, BiometricState> {
             final response = await biometricHelper.authenticate();
 
             if (response!) {
-              value.onSuccess('¡Bienvenido José!');
+              value.onSuccess(_welcomeMessage);
             } else {
               value.onError();
               emit(state.copyWith(useBiometrics: false, biometricName: null));
@@ -46,6 +47,14 @@ class BiometricBloc extends Bloc<BiometricEvent, BiometricState> {
             emit(state.copyWith(useBiometrics: false));
           }
         },
+        loginCode: (value) async {
+          if (value.code.endsWith(_password)) {
+            value.onSuccess(_welcomeMessage);
+          } else {
+            value.onError();
+          }
+        },
+        switchBiometric: (value) {},
       );
     });
   }

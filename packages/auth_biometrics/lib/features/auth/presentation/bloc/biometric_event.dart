@@ -7,4 +7,11 @@ class BiometricEvent with _$BiometricEvent {
     required ValueChanged<String> onSuccess,
     required VoidCallback onError,
   }) = _LoginBiometric;
+  const factory BiometricEvent.loginCode({
+    required String code,
+    required ValueChanged<String> onSuccess,
+    required VoidCallback onError,
+  }) = _LoginCode;
+
+  const factory BiometricEvent.switchBiometric() = _SwitchBiometric;
 }

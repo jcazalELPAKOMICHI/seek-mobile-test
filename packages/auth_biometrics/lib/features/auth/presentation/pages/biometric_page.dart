@@ -61,14 +61,10 @@ class __BiometricState extends State<_Biometric> {
                       BiometricButton(onSuccess: widget.onSuccess),
                     ] else ...[
                       //sino se usa, le llavamos al widget que muestra para ingresar PIN
-                      PinTextField(),
+                      PinTextField(onSuccess: widget.onSuccess),
                     ],
                     Column(
                       children: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: Text('Ingresar con PIN'),
-                        ),
                         ElevatedButton(
                           onPressed: () {
                             exit(0);

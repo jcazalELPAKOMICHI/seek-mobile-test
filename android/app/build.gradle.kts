@@ -11,7 +11,7 @@ plugins {
 }
 
 android {
-    namespace = "py.com.seek"
+    namespace = "com.example.flutter_qr_app"
     compileSdk = flutter.compileSdkVersion
    // ndkVersion = flutter.ndkVersion
 

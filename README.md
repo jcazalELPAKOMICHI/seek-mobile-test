@@ -4,6 +4,20 @@ Este repositorio contiene un proyecto Flutter estructurado como un **monorepo**,
 
 ---
 
+# 📌Requisitos
+- Flutter: 3.29.0
+- Java: 17
+
+# NO COMPATIBLE CON IOS
+
+
+# comandos para levantar
+
+- melos bootstrap
+- melos run build_runner
+- flutter pub run build_runner build --delete-conflicting-outputs 
+
+
 ## 🚀 **Estructura del Proyecto**
 ```
 seek-mobile-test/
@@ -138,25 +152,7 @@ dependencies:
 
 ---
 
-## 🧪 **Ejecución de Pruebas**
-Ejecuta todas las pruebas unitarias con:
-```sh
-melos run test
-```
-Ejemplo de prueba en `qr_scanner/test/qr_scanner_test.dart`:
-```dart
-import 'package:flutter_test/flutter_test.dart';
-import 'package:qr_scanner/qr_repository.dart';
 
-void main() {
-  test('Guardar un código QR', () async {
-    final repo = QrRepository();
-    await repo.saveQrCode('https://flutter.dev');
-    final history = repo.getQrHistory();
-    expect(history, isNotEmpty);
-  });
-}
-```
 
 ---
 

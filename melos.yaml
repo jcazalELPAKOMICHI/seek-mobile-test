@@ -4,15 +4,26 @@ packages:
   - packages/auth_biometrics
   - packages/qr_scanner
 scripts:
+  bootstrap:
+    run: |
+      melos exec -c 5 -- flutter pub get
+    description: "Run flutter pub get in all packages"
+  build_runner:
+    run: |
+      melos exec -c 5 --depends-on="build_runner" -- flutter pub run build_runner build --delete-conflicting-outputs
+    description: "Run build_runner in a specific package"
+  pigeon:
+    run: |
+      melos exec --depends-on="pigeon" -- dart run pigeon --input lib/core/pigeon/qr_scanner_plugin.dart
+    description: "Run Pigeon in all packages that depend on it"
+
   analyze:
     exec: dart analyze .
   test:selective_unit_test:
     exec: flutter test
-    dir-exists: "test"
-    fail-fast: true
     description: Run selective unit tests
 
   test:all_unit_tests:
     exec: flutter test
-    no-select: true
+
     description: Run all unit testsAdditionally, you can incorporate commands for analysis and code coverage. Melos offers a GUI interface for seamless execution without terminal input.

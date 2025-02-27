@@ -16,14 +16,16 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "firebase_core", path: "/Users/jcazal/.pub-cache/hosted/pub.dev/firebase_core-3.12.0/macos/firebase_core"),
-        .package(name: "local_auth_darwin", path: "/Users/jcazal/.pub-cache/hosted/pub.dev/local_auth_darwin-1.4.3/darwin/local_auth_darwin")
+        .package(name: "local_auth_darwin", path: "/Users/jcazal/.pub-cache/hosted/pub.dev/local_auth_darwin-1.4.3/darwin/local_auth_darwin"),
+        .package(name: "path_provider_foundation", path: "/Users/jcazal/.pub-cache/hosted/pub.dev/path_provider_foundation-2.4.1/darwin/path_provider_foundation")
     ],
     targets: [
         .target(
             name: "FlutterGeneratedPluginSwiftPackage",
             dependencies: [
                 .product(name: "firebase-core", package: "firebase_core"),
-                .product(name: "local-auth-darwin", package: "local_auth_darwin")
+                .product(name: "local-auth-darwin", package: "local_auth_darwin"),
+                .product(name: "path-provider-foundation", package: "path_provider_foundation")
             ]
         )
     ]

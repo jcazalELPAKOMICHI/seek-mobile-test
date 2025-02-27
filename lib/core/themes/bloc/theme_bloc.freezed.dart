@@ -12,7 +12,8 @@ part of 'theme_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$ThemeEvent {
@@ -20,47 +21,42 @@ mixin _$ThemeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() switchDarkMode,
     required TResult Function() switchLightMode,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? switchDarkMode,
     TResult? Function()? switchLightMode,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? switchDarkMode,
     TResult Function()? switchLightMode,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SwitchDarkMode value) switchDarkMode,
     required TResult Function(_SwitchLightMode value) switchLightMode,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SwitchDarkMode value)? switchDarkMode,
     TResult? Function(_SwitchLightMode value)? switchLightMode,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SwitchDarkMode value)? switchDarkMode,
     TResult Function(_SwitchLightMode value)? switchLightMode,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ThemeEventCopyWith<$Res> {
   factory $ThemeEventCopyWith(
-          ThemeEvent value, $Res Function(ThemeEvent) then) =
-      _$ThemeEventCopyWithImpl<$Res, ThemeEvent>;
+    ThemeEvent value,
+    $Res Function(ThemeEvent) then,
+  ) = _$ThemeEventCopyWithImpl<$Res, ThemeEvent>;
 }
 
 /// @nodoc
@@ -79,9 +75,10 @@ class _$ThemeEventCopyWithImpl<$Res, $Val extends ThemeEvent>
 
 /// @nodoc
 abstract class _$$SwitchDarkModeImplCopyWith<$Res> {
-  factory _$$SwitchDarkModeImplCopyWith(_$SwitchDarkModeImpl value,
-          $Res Function(_$SwitchDarkModeImpl) then) =
-      __$$SwitchDarkModeImplCopyWithImpl<$Res>;
+  factory _$$SwitchDarkModeImplCopyWith(
+    _$SwitchDarkModeImpl value,
+    $Res Function(_$SwitchDarkModeImpl) then,
+  ) = __$$SwitchDarkModeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -89,8 +86,9 @@ class __$$SwitchDarkModeImplCopyWithImpl<$Res>
     extends _$ThemeEventCopyWithImpl<$Res, _$SwitchDarkModeImpl>
     implements _$$SwitchDarkModeImplCopyWith<$Res> {
   __$$SwitchDarkModeImplCopyWithImpl(
-      _$SwitchDarkModeImpl _value, $Res Function(_$SwitchDarkModeImpl) _then)
-      : super(_value, _then);
+    _$SwitchDarkModeImpl _value,
+    $Res Function(_$SwitchDarkModeImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ThemeEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -184,9 +182,10 @@ abstract class _SwitchDarkMode implements ThemeEvent {
 
 /// @nodoc
 abstract class _$$SwitchLightModeImplCopyWith<$Res> {
-  factory _$$SwitchLightModeImplCopyWith(_$SwitchLightModeImpl value,
-          $Res Function(_$SwitchLightModeImpl) then) =
-      __$$SwitchLightModeImplCopyWithImpl<$Res>;
+  factory _$$SwitchLightModeImplCopyWith(
+    _$SwitchLightModeImpl value,
+    $Res Function(_$SwitchLightModeImpl) then,
+  ) = __$$SwitchLightModeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -194,8 +193,9 @@ class __$$SwitchLightModeImplCopyWithImpl<$Res>
     extends _$ThemeEventCopyWithImpl<$Res, _$SwitchLightModeImpl>
     implements _$$SwitchLightModeImplCopyWith<$Res> {
   __$$SwitchLightModeImplCopyWithImpl(
-      _$SwitchLightModeImpl _value, $Res Function(_$SwitchLightModeImpl) _then)
-      : super(_value, _then);
+    _$SwitchLightModeImpl _value,
+    $Res Function(_$SwitchLightModeImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ThemeEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -301,8 +301,9 @@ mixin _$ThemeState {
 /// @nodoc
 abstract class $ThemeStateCopyWith<$Res> {
   factory $ThemeStateCopyWith(
-          ThemeState value, $Res Function(ThemeState) then) =
-      _$ThemeStateCopyWithImpl<$Res, ThemeState>;
+    ThemeState value,
+    $Res Function(ThemeState) then,
+  ) = _$ThemeStateCopyWithImpl<$Res, ThemeState>;
   @useResult
   $Res call({bool isDarkMode});
 }
@@ -321,15 +322,17 @@ class _$ThemeStateCopyWithImpl<$Res, $Val extends ThemeState>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? isDarkMode = null,
-  }) {
-    return _then(_value.copyWith(
-      isDarkMode: null == isDarkMode
-          ? _value.isDarkMode
-          : isDarkMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  $Res call({Object? isDarkMode = null}) {
+    return _then(
+      _value.copyWith(
+            isDarkMode:
+                null == isDarkMode
+                    ? _value.isDarkMode
+                    : isDarkMode // ignore: cast_nullable_to_non_nullable
+                        as bool,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -337,8 +340,9 @@ class _$ThemeStateCopyWithImpl<$Res, $Val extends ThemeState>
 abstract class _$$ThemeStateImplCopyWith<$Res>
     implements $ThemeStateCopyWith<$Res> {
   factory _$$ThemeStateImplCopyWith(
-          _$ThemeStateImpl value, $Res Function(_$ThemeStateImpl) then) =
-      __$$ThemeStateImplCopyWithImpl<$Res>;
+    _$ThemeStateImpl value,
+    $Res Function(_$ThemeStateImpl) then,
+  ) = __$$ThemeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isDarkMode});
@@ -349,22 +353,24 @@ class __$$ThemeStateImplCopyWithImpl<$Res>
     extends _$ThemeStateCopyWithImpl<$Res, _$ThemeStateImpl>
     implements _$$ThemeStateImplCopyWith<$Res> {
   __$$ThemeStateImplCopyWithImpl(
-      _$ThemeStateImpl _value, $Res Function(_$ThemeStateImpl) _then)
-      : super(_value, _then);
+    _$ThemeStateImpl _value,
+    $Res Function(_$ThemeStateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ThemeState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? isDarkMode = null,
-  }) {
-    return _then(_$ThemeStateImpl(
-      isDarkMode: null == isDarkMode
-          ? _value.isDarkMode
-          : isDarkMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+  $Res call({Object? isDarkMode = null}) {
+    return _then(
+      _$ThemeStateImpl(
+        isDarkMode:
+            null == isDarkMode
+                ? _value.isDarkMode
+                : isDarkMode // ignore: cast_nullable_to_non_nullable
+                    as bool,
+      ),
+    );
   }
 }
 
