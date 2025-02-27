@@ -21,46 +21,25 @@ class BiometricBloc extends Bloc<BiometricEvent, BiometricState> {
           if (isDeviceSupported) {
             final biometricName =
                 await biometricHelper.getAvailableBiometricName();
-
-            //todo: Esto va a levantar la biometria por default al abrir la pantalla de flutter, ya que estamos usando la huella para almacenar password
-            //Como estamos simulando un login, vamos a usar biometric storage para guardar un dato default
-            //este dato se almacena en el SecureStorage
-
-            //primero consultamos si ya esta guardado
-            final isPassword = await biometricHelper.authenticate();
-            //si no esta guardado procedemos a hacer el almacenamiento
-            if (isPassword == null) {
-              final canAuthWithBiometric =
-                  await biometricHelper.canAuthWithBiometrics();
-
-              if (canAuthWithBiometric) {
-                final result = await biometricHelper.setBiometricConfig(
-                  _password,
-                );
-                //Si se guarda todo bien
-                if (result) {
-                  emit(state.copyWith(useBiometrics: true));
-                } else {
-                  //Sino directamente usamos la biometria por PIN
-                  emit(state.copyWith(useBiometrics: false));
-                }
-              }
-            } else {
-              emit(state.copyWith(useBiometrics: true));
-            }
-
-            emit(state.copyWith(biometricName: biometricName));
+            emit(
+              state.copyWith(
+                biometricName: biometricName,
+                useBiometrics: isDeviceSupported,
+              ),
+            );
+          } else {
+            emit(state.copyWith(biometricName: null, useBiometrics: false));
           }
         },
         loginBiometric: (value) async {
           try {
             final response = await biometricHelper.authenticate();
 
-            if (response != null) {
+            if (response!) {
               value.onSuccess('¡Bienvenido José!');
             } else {
               value.onError();
-              emit(state.copyWith(useBiometrics: false));
+              emit(state.copyWith(useBiometrics: false, biometricName: null));
             }
           } on Exception {
             value.onError();

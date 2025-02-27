@@ -1,5 +1,7 @@
 import 'package:auth_biometrics/core/constants/biometric_constants.dart';
-import 'package:biometric_storage/biometric_storage.dart';
+import 'package:flutter/services.dart';
+import 'package:local_auth_android/local_auth_android.dart';
+import 'package:local_auth_darwin/local_auth_darwin.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:local_auth/local_auth.dart';
@@ -32,54 +34,17 @@ enum AuthenticateStatus {
 }
 
 abstract class BiometricHelper {
-  Future<bool> canAuthWithBiometrics();
-
   Future<bool> isDeviceSupported();
 
   Future<String?>? getAvailableBiometricName();
 
   /// Returns encriptedPassword or biometricToken saved on secureStorage
-  Future<String?> authenticate();
-
-  Future<bool> setBiometricConfig(String? data);
+  Future<bool?> authenticate();
 }
 
 @Injectable(as: BiometricHelper)
 class BiometricHelperImpl extends BiometricHelper {
   final LocalAuthentication auth = LocalAuthentication();
-
-  final customPrompInfo = const PromptInfo(
-    androidPromptInfo: AndroidPromptInfo(
-      title: 'Autenticación biométrica',
-      description: 'Ingrese su huella digital',
-      negativeButton: 'Cancelar',
-    ),
-    iosPromptInfo: IosPromptInfo(
-      saveTitle: 'Autenticación biométrica',
-      accessTitle: 'Autenticación biométrica',
-    ),
-  );
-
-  @override
-  Future<bool> canAuthWithBiometrics() async {
-    final canCheckBiometric = await auth.canCheckBiometrics;
-    if (canCheckBiometric) {
-      final response = await BiometricStorage().canAuthenticate();
-      switch (response) {
-        case CanAuthenticateResponse.success:
-          return true;
-        case CanAuthenticateResponse.errorHwUnavailable:
-        case CanAuthenticateResponse.errorNoBiometricEnrolled:
-        case CanAuthenticateResponse.errorNoHardware:
-        case CanAuthenticateResponse.statusUnknown:
-        case CanAuthenticateResponse.unsupported:
-        case CanAuthenticateResponse.errorPasscodeNotSet:
-          return false;
-      }
-    } else {
-      return false;
-    }
-  }
 
   @override
   Future<String?>? getAvailableBiometricName() async {
@@ -99,40 +64,30 @@ class BiometricHelperImpl extends BiometricHelper {
   }
 
   @override
-  Future<String?> authenticate() async {
+  Future<bool?> authenticate() async {
     try {
-      final biometricAuthPassword = await BiometricStorage().getStorage(
-        BiometricConstants.biometricAuthPassword,
-        promptInfo: customPrompInfo,
+      final bool didAuthenticate = await auth.authenticate(
+        localizedReason: 'Ingresar huella o Face ID!',
+        options: const AuthenticationOptions(biometricOnly: true),
+        authMessages: const <AuthMessages>[
+          AndroidAuthMessages(
+            signInTitle: 'Autenticación biometrica',
+            cancelButton: 'Cancelar',
+            biometricSuccess: 'Reconocimiento exitoso',
+            biometricNotRecognized: 'Reconocimiento fallido',
+            biometricHint: 'Verificar',
+          ),
+          IOSAuthMessages(cancelButton: 'Cancelar'),
+        ],
       );
-      return biometricAuthPassword.read(promptInfo: customPrompInfo);
-    } catch (e) {
-      debugPrint(e.toString());
-      return null;
+      return didAuthenticate;
+    } on PlatformException catch (e) {
+      return false;
     }
   }
 
   @override
   Future<bool> isDeviceSupported() async {
     return auth.isDeviceSupported();
-  }
-
-  @override
-  Future<bool> setBiometricConfig(String? data) async {
-    try {
-      final biometricAuthPassword = await BiometricStorage().getStorage(
-        BiometricConstants.biometricAuthPassword,
-        promptInfo: customPrompInfo,
-      );
-      if (data == null) {
-        await biometricAuthPassword.delete();
-      } else {
-        await biometricAuthPassword.write(data);
-      }
-      return true;
-    } catch (e) {
-      debugPrint(e.toString());
-      return false;
-    }
   }
 }
