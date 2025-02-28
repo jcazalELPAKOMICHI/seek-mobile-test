@@ -1,8 +1,8 @@
 package com.example.flutter_qr_app.feature.qr_plugin.domain.use_case
 
-import QrScanPlugin
 import android.util.Log
 import com.example.flutter_qr_app.feature.qr_plugin.domain.model.QrSaveModel
+import io.flutter.plugins.QrScanPlugin
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

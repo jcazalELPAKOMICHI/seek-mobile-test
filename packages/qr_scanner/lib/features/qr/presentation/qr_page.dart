@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
+import 'package:qr_code_dart_scan/qr_code_dart_scan.dart';
 
 class QrScanner extends StatelessWidget {
   const QrScanner({super.key, required this.qrData});
@@ -23,7 +23,7 @@ class _Qr extends StatefulWidget {
 
 class __QrState extends State<_Qr> with WidgetsBindingObserver {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  QRViewController? controller;
+  QRCodeDartScanController? controller;
   bool _enableflash = false;
   @override
   void initState() {
@@ -35,13 +35,13 @@ class __QrState extends State<_Qr> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
-    controller?.dispose();
+    controller?.cameraController?.dispose();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      controller?.resumeCamera();
+      controller?.cameraController?.resumePreview();
     }
   }
 
@@ -49,9 +49,9 @@ class __QrState extends State<_Qr> with WidgetsBindingObserver {
   void reassemble() {
     super.reassemble();
     if (Platform.isAndroid) {
-      controller!.pauseCamera();
+      controller!.cameraController?.pausePreview();
     } else if (Platform.isIOS) {
-      controller!.resumeCamera();
+      controller?.cameraController?.resumePreview();
     }
   }
 
@@ -62,21 +62,24 @@ class __QrState extends State<_Qr> with WidgetsBindingObserver {
         children: [
           Expanded(
             flex: 5,
-            child: QRView(
-              key: qrKey,
-              onQRViewCreated: _onQRViewCreated,
-              formatsAllowed: [BarcodeFormat.qrcode],
-              overlay: QrScannerOverlayShape(
-                overlayColor: Colors.grey.withOpacity(0.8),
-              ),
+            child: QRCodeDartScanView(
+              formats: [BarcodeFormat.qrCode],
+              typeScan: TypeScan.live,
+              typeCamera: TypeCamera.back,
+              controller: controller,
+              imageDecodeOrientation: ImageDecodeOrientation.portrait,
+
+              onCapture: (scanData) {
+                widget.qrData(scanData.text);
+              },
             ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           _enableflash = !_enableflash;
-          controller?.toggleFlash();
+          await controller?.setFlash(_enableflash);
           setState(() {});
         },
         tooltip: 'Escanear QR',
@@ -89,13 +92,5 @@ class __QrState extends State<_Qr> with WidgetsBindingObserver {
         ),
       ),
     );
-  }
-
-  void _onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
-      controller.pauseCamera();
-      widget.qrData(scanData.code ?? '');
-    });
   }
 }

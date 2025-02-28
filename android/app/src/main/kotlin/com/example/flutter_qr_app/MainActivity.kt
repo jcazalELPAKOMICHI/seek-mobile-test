@@ -10,6 +10,7 @@ import com.example.flutter_qr_app.feature.qr_plugin.domain.use_case.QrScanImpl
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugins.GeneratedPluginRegistrant
+import io.flutter.plugins.QrScanPlugin
 
 class MainActivity: FlutterFragmentActivity() {
 

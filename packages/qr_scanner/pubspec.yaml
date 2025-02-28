@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  qr_code_scanner_plus: 2.0.10
+  qr_code_dart_scan: ^0.9.11
 
 dev_dependencies:
   flutter_test:
@@ -22,7 +22,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -53,3 +52,4 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/to/font-from-package
+  disable-swift-package-manager: true
