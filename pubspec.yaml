@@ -32,3 +32,4 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   generate: true # Add this line
+  disable-swift-package-manager: true
